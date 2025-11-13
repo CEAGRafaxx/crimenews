@@ -1,78 +1,79 @@
-/* ------------------- RESET ------------------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+/* ===========================
+   ESTILO GERAL
+=========================== */
 
 body {
-    background: #f5f5f5;
-    color: #222;
-    transition: background 0.3s, color 0.3s;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
 }
 
-/* --------------------- NAV --------------------- */
+.dark-mode {
+    background: #181818;
+    color: white;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
 nav {
-    width: 100%;
-    background: #111;
+    background: #222;
     color: white;
     padding: 15px 20px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-}
-
-nav .logo {
-    font-weight: bold;
-    font-size: 22px;
+    justify-content: space-between;
+    flex-wrap: wrap; /* permite quebrar no mobile */
 }
 
 .nav-buttons {
     display: flex;
-    align-items: center;
     gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.nav-buttons button {
-    background: #333;
-    border: none;
+nav button {
     padding: 8px 12px;
-    color: white;
-    border-radius: 6px;
+    border: none;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-.nav-buttons button:hover {
     background: #444;
+    color: white;
+    border-radius: 5px;
 }
 
-#userDisplay {
-    font-weight: bold;
-    margin-right: 10px;
+nav button:hover {
+    background: #666;
 }
 
-.hidden {
-    display: none !important;
-}
+/* ===========================
+   PÁGINAS
+=========================== */
 
-/* --------------------- PÁGINAS --------------------- */
 .page {
     padding: 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 .center-page {
-    max-width: 500px;
+    max-width: 450px;
     margin: auto;
 }
 
-/* --------------------- FORMULÁRIOS --------------------- */
+/* ===========================
+   FORMULÁRIOS
+=========================== */
+
 .form-box {
-    background: white;
-    padding: 20px;
-    box-shadow: 0 0 10px #0002;
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -80,90 +81,103 @@ nav .logo {
 
 .form-box input,
 .form-box textarea {
-    width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-.form-box textarea {
-    height: 120px;
-    resize: vertical;
+    border-radius: 6px;
+    font-size: 16px;
 }
 
 .form-box button {
     background: #222;
     color: white;
+    padding: 10px;
+    border-radius: 6px;
     border: none;
-    padding: 12px;
-    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
 }
 
 .form-box button:hover {
-    background: #444;
+    background: #333;
 }
 
-/* ------------------- NOTÍCIAS ------------------- */
+/* ===========================
+   NOTÍCIAS
+=========================== */
+
 .noticia {
     background: white;
     padding: 15px;
     margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px #0002;
-}
-
-.noticia h3 {
-    margin-bottom: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .noticia img {
-    max-width: 450px;   /* largura máxima */
-    max-height: 250px;  /* altura máxima */
-    width: 100%;        /* ocupa o espaço permitido */
-    object-fit: cover;  /* corta para ficar bonito */
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;   /* Ajuste automático para celular */
     border-radius: 6px;
-    display: block;
-    margin: 10px 0;
+    margin-top: 10px;
 }
 
+/* ===========================
+   MODO ESCURO ELEMENTOS
+=========================== */
 
-/* ----------------- DARK MODE ----------------- */
-body.dark-mode {
-    background: #1c1c1c;
-    color: #e5e5e5;
-}
-
-body.dark-mode nav {
-    background: #000;
-}
-
-body.dark-mode .nav-buttons button {
+.dark-mode .noticia {
     background: #222;
+    color: #eee;
 }
 
-body.dark-mode .nav-buttons button:hover {
-    background: #333;
-}
-
-body.dark-mode .form-box {
+.dark-mode input,
+.dark-mode textarea {
     background: #2b2b2b;
     color: white;
+    border: 1px solid #666;
 }
 
-body.dark-mode .form-box input,
-body.dark-mode .form-box textarea {
-    background: #1a1a1a;
-    color: white;
-    border: 1px solid #555;
-}
+/* ===========================
+   DESIGN RESPONSIVO
+=========================== */
 
-body.dark-mode .noticia {
-    background: #272727;
-    color: #ddd;
-}
+/* ------ CELULAR (ATÉ 600px) ------- */
 
-body.dark-mode .noticia img {
-    opacity: 0.9;
+@media (max-width: 600px) {
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .nav-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    nav button {
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .logo img {
+        width: 130px;
+    }
+
+    .noticia {
+        padding: 12px;
+    }
+
+    .noticia img {
+        max-height: 200px;
+    }
+
+    .center-page {
+        width: 95%;
+    }
+
+    .form-box input,
+    .form-box textarea {
+        font-size: 15px;
+    }
 }
