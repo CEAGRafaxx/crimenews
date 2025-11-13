@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Crime News</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <h1 class="logo">
+        <img src="logo.png" alt="CrimeNews Logo" style="width:160px; height:auto;">
+    </h1>
+
+    <div class="nav-buttons">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('suggest')">Sugerir Notícia</button>
+        <button onclick="showPage('post')">Publicar</button>
+        <button onclick="showPage('login')" id="loginBtn">Login</button>
+        <button onclick="showPage('register')" id="registerBtn">Registrar</button>
+
+        <span id="userDisplay" class="hidden"></span>
+
+        <button id="logoutBtn" class="hidden">Sair</button>
+        <button id="darkModeToggle">🌙</button>
+    </div>
+</nav>
+
+<!-- Página Home -->
+<section id="home" class="page">
+    <h2>Notícias Recentes</h2>
+    <div id="newsList"></div>
+</section>
+
+<!-- Página Sugerir -->
+<section id="suggest" class="page hidden center-page">
+    <h2>Sugerir uma Notícia</h2>
+    <form id="suggestForm" class="form-box">
+        <input type="text" id="suggestTitle" placeholder="Título" required>
+        <textarea id="suggestContent" placeholder="Descreva o caso" required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+</section>
+
+<!-- Página Publicar -->
+<section id="post" class="page hidden center-page">
+    <h2>Publicar Notícia</h2>
+    <form id="postForm" class="form-box">
+        <input type="text" id="postTitle" placeholder="Título" required>
+        <textarea id="postContent" placeholder="Conteúdo" required></textarea>
+        <input type="text" id="postImageURL" placeholder="URL da imagem (ex: https://...)" required>
+        <button type="submit">Publicar</button>
+    </form>
+</section>
+
+<!-- Página Login -->
+<section id="login" class="page hidden center-page">
+    <h2>Login</h2>
+    <form id="loginForm" class="form-box">
+        <input type="email" id="loginEmail" placeholder="E-mail" required>
+        <input type="password" id="loginPassword" placeholder="Senha" required>
+        <button type="submit">Entrar</button>
+    </form>
+</section>
+
+<!-- Página Registrar -->
+<section id="register" class="page hidden center-page">
+    <h2>Registrar</h2>
+    <form id="registerForm" class="form-box">
+        <input type="email" id="registerEmail" placeholder="E-mail" required>
+        <input type="text" id="registerUsername" placeholder="Nome de usuário" required>
+        <input type="password" id="registerPassword" placeholder="Senha" required>
+        <button type="submit">Registrar</button>
+    </form>
+</section>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

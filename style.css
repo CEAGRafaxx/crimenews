@@ -1,0 +1,169 @@
+/* ------------------- RESET ------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #222;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* --------------------- NAV --------------------- */
+nav {
+    width: 100%;
+    background: #111;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-buttons button {
+    background: #333;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-buttons button:hover {
+    background: #444;
+}
+
+#userDisplay {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --------------------- PÁGINAS --------------------- */
+.page {
+    padding: 20px;
+}
+
+.center-page {
+    max-width: 500px;
+    margin: auto;
+}
+
+/* --------------------- FORMULÁRIOS --------------------- */
+.form-box {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px #0002;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-box input,
+.form-box textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.form-box textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.form-box button {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-box button:hover {
+    background: #444;
+}
+
+/* ------------------- NOTÍCIAS ------------------- */
+.noticia {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px #0002;
+}
+
+.noticia h3 {
+    margin-bottom: 8px;
+}
+
+.noticia img {
+    max-width: 450px;   /* largura máxima */
+    max-height: 250px;  /* altura máxima */
+    width: 100%;        /* ocupa o espaço permitido */
+    object-fit: cover;  /* corta para ficar bonito */
+    border-radius: 6px;
+    display: block;
+    margin: 10px 0;
+}
+
+
+/* ----------------- DARK MODE ----------------- */
+body.dark-mode {
+    background: #1c1c1c;
+    color: #e5e5e5;
+}
+
+body.dark-mode nav {
+    background: #000;
+}
+
+body.dark-mode .nav-buttons button {
+    background: #222;
+}
+
+body.dark-mode .nav-buttons button:hover {
+    background: #333;
+}
+
+body.dark-mode .form-box {
+    background: #2b2b2b;
+    color: white;
+}
+
+body.dark-mode .form-box input,
+body.dark-mode .form-box textarea {
+    background: #1a1a1a;
+    color: white;
+    border: 1px solid #555;
+}
+
+body.dark-mode .noticia {
+    background: #272727;
+    color: #ddd;
+}
+
+body.dark-mode .noticia img {
+    opacity: 0.9;
+}
