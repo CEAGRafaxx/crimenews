@@ -18,6 +18,7 @@
         <button onclick="showPage('post')">Publicar</button>
         <button onclick="showPage('login')" id="loginBtn">Login</button>
         <button onclick="showPage('register')" id="registerBtn">Registrar</button>
+        <button onclick="showPage('suggestPanel')">Painel de Sugestões</button>
 
         <span id="userDisplay" class="hidden"></span>
 
@@ -25,6 +26,8 @@
         <button id="darkModeToggle">🌙</button>
     </div>
 </nav>
+
+
 
 <!-- Página Home -->
 <section id="home" class="page">
@@ -73,6 +76,31 @@
         <button type="submit">Registrar</button>
     </form>
 </section>
+
+<!-- Comentários -->
+<section id="viewPost" class="page hidden center-page">
+    <button onclick="showPage('home')" class="back-btn">⬅ Voltar</button>
+
+    <div id="viewPostContent"></div>
+
+    <h3>Comentários</h3>
+    
+    <div id="commentsList"></div>
+
+    <form id="commentForm" class="form-box">
+        <textarea id="commentText" placeholder="Escreva um comentário..." required></textarea>
+        <button type="submit">Comentar</button>
+    </form>
+</section>
+
+<section id="suggestPanel" class="page hidden center-page">
+    <h2>Painel de Sugestões</h2>
+
+    <div id="suggestionsList" class="suggestions-box">
+        <p>Carregando sugestões...</p>
+    </div>
+</section>
+
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
