@@ -181,3 +181,52 @@ nav button:hover {
         font-size: 15px;
     }
 }
+.comentario {
+    background: #f1f1f1;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.comentario p {
+    margin: 5px 0;
+}
+
+.back-btn {
+    margin-bottom: 15px;
+}
+.noticia {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* ANIMAÇÃO AO PASSAR O MOUSE (PC) */
+.noticia:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.25);
+}
+.suggestions-box {
+    background: var(--card-bg, #fff);
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 0 10px #0002;
+}
+
+.sug-item {
+    margin-bottom: 20px;
+}
+
+.sug-item h3 {
+    margin-bottom: 8px;
+}
+
+.dataSug {
+    font-size: 12px;
+    color: #777;
+}
