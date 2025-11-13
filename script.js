@@ -104,34 +104,102 @@ auth.onAuthStateChanged(async user => {
         loginBtn.classList.remove("hidden");
         registerBtn.classList.remove("hidden");
     }
+    
 });
 
 /* -------------------- CARREGAR NOTÍCIAS -------------------- */
 function carregarNoticias() {
     db.collection("noticias")
-    .orderBy("timestamp", "desc")
-    .onSnapshot(snapshot => {
+        .orderBy("timestamp", "desc")
+        .onSnapshot(snapshot => {
+            let html = "";
 
-        let html = "";
+            snapshot.forEach(doc => {
+                const noticia = doc.data();
+                html += `
+                    <div class="noticia" onclick="abrirNoticia('${doc.id}')">
+                        <h3>${noticia.titulo}</h3>
+                        <img src="${noticia.imagem}" style="width:100%; border-radius:6px;">
+                        <p>${noticia.conteudo.substring(0,120)}...</p>
+                        <small>Clique para ver mais</small>
+                    </div>
+                `;
+            });
 
-        snapshot.forEach(doc => {
-            const n = doc.data();
-
-            html += `
-                <div class="noticia">
-                    <h3>${n.titulo}</h3>
-                    <img src="${n.imagem}" style="width:100%; border-radius:6px;">
-                    <p>${n.conteudo}</p>
-                    <small>Autor: ${n.autor}</small>
-                </div>
-            `;
+            newsList.innerHTML = html;
         });
-
-        document.getElementById("newsList").innerHTML = html;
-    });
 }
 
+
 carregarNoticias();
+
+async function abrirNoticia(id) {
+    const doc = await db.collection("noticias").doc(id).get();
+    if (!doc.exists) return;
+
+    const noticia = doc.data();
+
+    document.getElementById("viewPostContent").innerHTML = `
+        <h2>${noticia.titulo}</h2>
+        <img src="${noticia.imagem}" style="width:100%; border-radius:6px;">
+        <p>${noticia.conteudo}</p>
+        <small>Autor: ${noticia.autor}</small>
+    `;
+
+    window.currentPostId = id;
+
+    carregarComentarios(id);
+
+    showPage("viewPost");
+}
+
+function carregarComentarios(postId) {
+    db.collection("noticias").doc(postId)
+        .collection("comentarios")
+        .orderBy("timestamp", "asc")
+        .onSnapshot(snapshot => {
+            let html = "";
+
+            snapshot.forEach(doc => {
+                const c = doc.data();
+                html += `
+                    <div class="comentario">
+                        <strong>${c.autor}</strong>
+                        <p>${c.texto}</p>
+                        <small>${c.timestamp.toDate().toLocaleString()}</small>
+                    </div>
+                `;
+            });
+
+            document.getElementById("commentsList").innerHTML = html;
+        });
+}
+
+document.getElementById("commentForm").addEventListener("submit", async e => {
+    e.preventDefault();
+
+    if (!auth.currentUser) {
+        alert("Você precisa estar logado para comentar.");
+        return;
+    }
+
+    const texto = document.getElementById("commentText").value;
+    const postId = window.currentPostId;
+
+    const userDoc = await db.collection("usuarios").doc(auth.currentUser.uid).get();
+    const autor = userDoc.exists ? userDoc.data().username : auth.currentUser.email;
+
+    db.collection("noticias").doc(postId)
+      .collection("comentarios")
+      .add({
+          texto: texto,
+          autor: autor,
+          timestamp: new Date()
+      });
+
+    document.getElementById("commentText").value = "";
+});
+
 
 /* ---------------------- SUGESTÕES ------------------------- */
 if (suggestForm) {
@@ -175,3 +243,38 @@ postForm.addEventListener("submit", async e => {
 darkModeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
 });
+/* ---------------- PAINEL DE SUGESTÕES ---------------- */
+
+function carregarSugestoes() {
+    const container = document.getElementById("suggestionsList");
+
+    db.collection("sugestoes")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+
+        if (snapshot.empty) {
+            container.innerHTML = "<p>Nenhuma sugestão enviada ainda.</p>";
+            return;
+        }
+
+        let html = "";
+
+        snapshot.forEach(doc => {
+            const sug = doc.data();
+            const data = sug.timestamp ? sug.timestamp.toDate().toLocaleString() : "data desconhecida";
+
+            html += `
+                <div class="sug-item">
+                    <h3>${sug.titulo}</h3>
+                    <p>${sug.conteudo}</p>
+                    <span class="dataSug">${data}</span>
+                    <hr>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    });
+}
+
+carregarSugestoes();
